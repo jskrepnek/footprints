@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Autofac;
+using Autofac.Integration.Mvc;
 
 namespace footprints.web
 {
@@ -33,6 +36,9 @@ namespace footprints.web
 
         protected void Application_Start()
         {
+            // enable dependency injection
+            SetResolver();
+
             AreaRegistration.RegisterAllAreas();
 
             // Use LocalDB for Entity Framework by default
@@ -40,6 +46,14 @@ namespace footprints.web
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+        }
+
+        protected void SetResolver()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }
