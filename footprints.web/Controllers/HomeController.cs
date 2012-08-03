@@ -12,6 +12,5 @@ namespace footprints.web.Controllers
         {
             return View();
         }
-
     }
 }
