@@ -1,0 +1,38 @@
+body {
+}
+
+.title {
+    text-align: center;
+    padding-top: 200px;
+    background-image: url(images/footprints.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position:top;
+    width: 100%;
+    background-color:#f2f2f4;
+    border-bottom-color:#808080;
+    border-bottom-style:ridge;
+    border-bottom-width:thin;
+    margin-bottom: 100px;
+}
+
+.footprints-watermark {
+    background-image: url(images/footprints.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    width: 1200px;
+    height: 30px;
+}
+
+.footprints-title {
+    font-family: Aharoni;
+    font-size: 150px;
+    line-height: 160px;
+}
+
+.tile-action {
+    font-family: Aharoni;
+    font-size: 75px;
+    line-height: 90px;
+}

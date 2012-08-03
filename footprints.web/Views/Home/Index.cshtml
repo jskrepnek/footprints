@@ -3,8 +3,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="container title">
+    <p class="footprints-title">footprints</p>
+</div>
 <div class="container">
-    <h2>Footprints</h2>
-    <a class="btn btn-primary">Register</a>
-    <a class="btn btn-primary">View</a>
+    <div class="row">
+        <div class="span6">@Html.ActionLink("add your footprint", "Add", "Footprints", null, new { @class="btn btn-primary tile-action"})
+        </div>
+        <div class="span6">@Html.ActionLink("view the footprints", "View", "Footprints", null, new { @class="btn btn-primary tile-action"})
+        </div>
+
+    </div>
+
 </div>
