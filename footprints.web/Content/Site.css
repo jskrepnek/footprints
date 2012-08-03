@@ -33,8 +33,8 @@ body {
 
 .tile-action {
     font-family: Aharoni;
-    font-size: 75px;
-    line-height: 90px;
+    font-size: 85px;
+    line-height: 90px;    
 }
 
 .footprint-form {
@@ -72,5 +72,5 @@ input {
 }
 
 #inner {
-    position:static;
+    
 }
