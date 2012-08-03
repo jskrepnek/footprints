@@ -6,6 +6,7 @@ using System.Web;
 
 namespace footprints.web.Models
 {
+    [Serializable()]
     public class PrintModel
     {
         [Required]

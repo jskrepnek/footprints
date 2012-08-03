@@ -26,12 +26,19 @@ namespace footprints.web.Controllers
             return View();
         }
 
+        public ActionResult Added()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult AddPrint(PrintModel model)
         {
             if (ModelState.IsValid)
             {
                 CommandAgent.SendCommand(model);
+
+                return RedirectToAction("Added");
             }
 
             return View();
