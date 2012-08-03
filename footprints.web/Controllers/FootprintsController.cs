@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using footprints.web.Models;
 
 namespace footprints.web.Controllers
 {
     public class FootprintsController : Controller
     {
-        //
-        // GET: /Footprints/
+        ICommandAgent CommandAgent { get; set; }
+
+        public FootprintsController(ICommandAgent commandAgent)
+        {
+            CommandAgent = commandAgent;
+        }
 
         public ActionResult ViewPrints()
         {
@@ -18,6 +23,17 @@ namespace footprints.web.Controllers
 
         public ActionResult AddPrint()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddPrint(PrintModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                CommandAgent.SendCommand(model);
+            }
+
             return View();
         }
     }

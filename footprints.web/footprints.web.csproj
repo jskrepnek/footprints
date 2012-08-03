@@ -107,11 +107,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureQueue.cs" />
     <Compile Include="Controllers\FootprintsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ICommandAgent.cs" />
     <Compile Include="Models\PrintModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -195,8 +197,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Footprints\View.cshtml" />
-    <Content Include="Views\Footprints\Add.cshtml" />
     <Content Include="Views\Footprints\ViewPrints.cshtml" />
     <Content Include="Views\Footprints\AddPrint.cshtml" />
   </ItemGroup>
