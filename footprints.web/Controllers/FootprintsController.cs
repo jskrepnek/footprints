@@ -10,15 +10,17 @@ namespace footprints.web.Controllers
     public class FootprintsController : Controller
     {
         ICommandAgent CommandAgent { get; set; }
+        IPrintsRepository PrintsRepository { get; set; }
 
-        public FootprintsController(ICommandAgent commandAgent)
+        public FootprintsController(ICommandAgent commandAgent, IPrintsRepositoryFactory printsListFactory)
         {
             CommandAgent = commandAgent;
+            PrintsRepository = printsListFactory.Create();
         }
 
         public ActionResult ViewPrints()
         {
-            return View();
+            return View(PrintsRepository.GetPrints());
         }
 
         public ActionResult AddPrint()

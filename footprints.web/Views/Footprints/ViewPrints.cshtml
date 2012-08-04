@@ -1,6 +1,47 @@
-﻿@{
+﻿@model IEnumerable<footprints.web.Models.PrintModel>
+@{
     ViewBag.Title = "ViewPrints";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ViewPrints</h2>
+<h2>Prints</h2>
+
+@if (Model.Count() > 0)
+{   
+    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"
+        id="pendingAccountTable" width="100%">
+        <thead>
+            <tr>
+                <th>First Name
+                </th>
+                <th>Last Name
+                </th>
+                <th>Phrase
+                </th>
+                <th>Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var print in Model)
+            {
+                <tr>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => print.FirstName)
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => print.LastName)
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => print.Phrase)
+                    </td>
+                    <td align="center"></td>
+                </tr>
+            }
+        </tbody>
+    </table>   
+}
+else
+{
+    <h3>There are no prints.</h3>
+}

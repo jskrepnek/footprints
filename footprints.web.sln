@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "footprints.web", "footprint
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "footprints.test", "footprints.test\footprints.test.csproj", "{33071AA0-454F-437E-96BA-A5B3D28BD84D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "footprints.worker", "footprints.worker\footprints.worker.csproj", "{B04D464F-DD4E-4978-A740-F5F559D5CF94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{8451F915-B31A-4F5C-A2A4-C6E558A4059E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8451F915-B31A-4F5C-A2A4-C6E558A4059E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8451F915-B31A-4F5C-A2A4-C6E558A4059E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B04D464F-DD4E-4978-A740-F5F559D5CF94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B04D464F-DD4E-4978-A740-F5F559D5CF94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B04D464F-DD4E-4978-A740-F5F559D5CF94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B04D464F-DD4E-4978-A740-F5F559D5CF94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

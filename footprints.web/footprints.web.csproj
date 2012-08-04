@@ -118,6 +118,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzurePrintsRepository.cs" />
+    <Compile Include="AzurePrintsRepositoryFactory.cs" />
     <Compile Include="AzureQueue.cs" />
     <Compile Include="Controllers\FootprintsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -125,7 +127,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ICommandAgent.cs" />
+    <Compile Include="IPrintsRepository.cs" />
+    <Compile Include="IPrintsRepositoryFactory.cs" />
     <Compile Include="Models\PrintModel.cs" />
+    <Compile Include="Models\PrintsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

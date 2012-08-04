@@ -53,6 +53,7 @@ namespace footprints.web
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<AzureQueue>().As<ICommandAgent>();
+            builder.RegisterType<AzurePrintsRepositoryFactory>().As<IPrintsRepositoryFactory>();
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
