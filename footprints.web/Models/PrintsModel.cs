@@ -18,6 +18,14 @@ namespace footprints.web.Models
             list.Add (print);
         }
 
+        public List<PrintModel> List
+        {
+            get
+            {
+                return list;
+            }
+        }
+
         public List<PrintModel> list { get; set; }
     }
 }

@@ -3,36 +3,37 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
+using log4net;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace footprints.web
 {
     public class AzureQueue : ICommandAgent
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(PrintsBlob));
+
         public void SendCommand(object command)
         {
-            // take the command to register a footprint and put the command
+            // take the command to register a footprint and put the command 
             // on an azure queue inside of a brokered messsage
 
-            // retrieve the storage account
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                ConfigurationManager.AppSettings["StorageConnectionString"]);
-
-            // create the queue client
-            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-
-            // create and/or get a reference to a queue
-            CloudQueue queue = queueClient.GetQueueReference("footprints");
-            queue.CreateIfNotExist();
-
             // serialize the command
-            string json = JsonConvert.SerializeObject(command);
+            string json = JsonConvert.SerializeObject(command, new JsonSerializerSettings
+                {
+                    Error = delegate(object sender, ErrorEventArgs args)
+                    {
+                        log.Error("There was an error serializing the command into JSON.", args.ErrorContext.Error);
+                    }
+                    
+                });
 
-            // add the command to the queue
+            // create a message and add it to the queue
             var message = new CloudQueueMessage(json);
-            queue.AddMessage(message);
+
+            AzurePrints.CloudQueue.AddMessage(message);
         }
     }
 }

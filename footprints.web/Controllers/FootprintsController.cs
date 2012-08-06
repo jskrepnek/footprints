@@ -38,6 +38,7 @@ namespace footprints.web.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Date = DateTime.Now;
                 CommandAgent.SendCommand(model);
 
                 return RedirectToAction("Added");
