@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>footprints.test</RootNamespace>
     <AssemblyName>footprints.test</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +34,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -43,7 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Tests\FootprintsControllerTests.cs" />
+    <Compile Include="Tests\FootprintsWorkerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\HomeControllerTests.cs" />
   </ItemGroup>
@@ -54,6 +59,10 @@
     <ProjectReference Include="..\footprints.web\footprints.web.csproj">
       <Project>{8451f915-b31a-4f5c-a2a4-c6e558a4059e}</Project>
       <Name>footprints.web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\footprints.worker\footprints.worker.csproj">
+      <Project>{b04d464f-dd4e-4978-a740-f5f559d5cf94}</Project>
+      <Name>footprints.worker</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,60 +4,42 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using footprints.web;
 using footprints.web.Models;
-using Microsoft.WindowsAzure;
-using Microsoft.WindowsAzure.StorageClient;
 using Newtonsoft.Json;
 
 namespace footprints.worker
 {
-    class Program
+    public class FootPrintsWorker
     {
-        const string QUEUE_NAME = "footprints";
-        const string BLOB_CONTAINER_NAME = "footprints";
-        const string BLOB_NAME = "footprints";
-
         static void Main(string[] args)
         {
-            // Retrieve storage account from connection-string
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                ConfigurationManager.AppSettings["StorageConnectionString"]);
+            IQueue queue = new AzurePrintsQueue();
+            IStorage storage = new AzurePrintsStorage();
+            IKeyReader reader = new KeyReader();
 
-            // Create the queue client
-            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+            Execute(queue, storage, reader);
+        }
 
-            // Retrieve a reference to a queue
-            CloudQueue queue = queueClient.GetQueueReference(QUEUE_NAME);
-
-            // Create the blob client
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-
-            // Retrieve a reference to a container
-            CloudBlobContainer container = blobClient.GetContainerReference(BLOB_CONTAINER_NAME);
-            container.CreateIfNotExist();
-
+        public static void Execute(IQueue queue, IStorage storage, IKeyReader reader)
+        {
             while (true)
             {
-                if (Console.KeyAvailable)
-                {
-                    break;
-                }
-
                 // Get the next message
-                CloudQueueMessage retrievedMessage = queue.GetMessage();
+                string msgId;
+                string popReceipt;
+                string retrievedMessage = queue.GetMessage(out msgId, out popReceipt);
 
                 //Process the message in less than 30 seconds, and then delete the message
-                if (retrievedMessage != null)
+                if (!String.IsNullOrEmpty(retrievedMessage))
                 {
-                    string json = retrievedMessage.AsString;
-
                     Console.WriteLine("Top message");
                     Console.WriteLine("Json:");
-                    Console.WriteLine(json);
+                    Console.WriteLine(retrievedMessage);
 
                     try
                     {
-                        PrintModel print = JsonConvert.DeserializeObject<PrintModel>(json);
+                        PrintModel print = JsonConvert.DeserializeObject<PrintModel>(retrievedMessage);
 
                         Console.WriteLine("Deserialized Print Model");
                         Console.WriteLine("First Name: " + print.FirstName);
@@ -70,16 +52,13 @@ namespace footprints.worker
                         // serialize it
                         // upload the blob
 
-                        var blob = container.GetBlobReference(BLOB_NAME);
+                        // the container where we'll put existing prints and the new print
                         var prints = new PrintsModel();
 
-                        try
+                        if (storage.Exists())
                         {
-                            // this tests if a previous blob exists
-                            blob.FetchAttributes();
-
-                            // existing blob
-                            string blobJson = blob.DownloadText();
+                            // existing content
+                            string blobJson = storage.DownloadText();
 
                             // try to deserialize it
                             try
@@ -88,11 +67,11 @@ namespace footprints.worker
                             }
                             catch (Exception)
                             {
-                                // couldn't deserialize the blob, so throw forget it, the new blob will
+                                // couldn't deserialize the blob, so forget it, the new blob will
                                 // overwrite it
                             }
                         }
-                        catch
+                        else
                         {
                             // no existing blob
                         }
@@ -104,7 +83,7 @@ namespace footprints.worker
                         string jsonWithNewPrint = JsonConvert.SerializeObject(prints);
 
                         // upload the blob
-                        blob.UploadText(jsonWithNewPrint);
+                        storage.UploadText(jsonWithNewPrint);
                     }
                     catch (Exception)
                     {
@@ -113,7 +92,7 @@ namespace footprints.worker
                     finally
                     {
                         Console.WriteLine("Deleting message");
-                        queue.DeleteMessage(retrievedMessage);
+                        queue.DeleteMessage(msgId, popReceipt);
                     }
                 }
                 else
@@ -123,6 +102,11 @@ namespace footprints.worker
 
                 // check again in 5 seconds
                 System.Threading.Thread.Sleep(5000);
+
+                if (reader.KeyAvailable)
+                {
+                    break;
+                }
             }
         }
     }

@@ -14,6 +14,14 @@ namespace footprints.web
         const string BLOB_NAME = "footprints";
         const string QUEUE_NAME = "footprints";
 
+        private static CloudStorageAccount _StorageAccountInstance = null;
+        private static CloudBlobClient _BlobClientInstance = null;
+        private static CloudBlobContainer _BlobContainerInstance = null;
+        private static CloudBlob _BlobInstance = null;
+
+        private static CloudQueueClient _QueueClientInstance = null;
+        private static CloudQueue _QueueInstance = null;
+
         static string ConnectionString
         {
             get
@@ -26,7 +34,11 @@ namespace footprints.web
         {
             get
             {
-                return CloudStorageAccount.Parse(ConnectionString);
+                if (_StorageAccountInstance == null)
+                {
+                    _StorageAccountInstance = CloudStorageAccount.Parse(ConnectionString);
+                }
+                return _StorageAccountInstance;
             }
         }
 
@@ -34,7 +46,11 @@ namespace footprints.web
         {
             get
             {
-                return CloudStorageAccount.CreateCloudBlobClient();
+                if (_BlobClientInstance == null)
+                {
+                    _BlobClientInstance = CloudStorageAccount.CreateCloudBlobClient();
+                }
+                return _BlobClientInstance;
             }
         }
 
@@ -42,9 +58,12 @@ namespace footprints.web
         {
             get
             {
-                var container = CloudBlobClient.GetContainerReference(BLOB_CONTAINER_NAME);
-                container.CreateIfNotExist();
-                return container;
+                if (_BlobContainerInstance == null)
+                {
+                    _BlobContainerInstance = CloudBlobClient.GetContainerReference(BLOB_CONTAINER_NAME);
+                    _BlobContainerInstance.CreateIfNotExist();
+                }
+                return _BlobContainerInstance;
             }
         }
 
@@ -52,7 +71,11 @@ namespace footprints.web
         {
             get
             {
-                return CloudBlobContainer.GetBlobReference(BLOB_NAME);
+                if (_BlobInstance == null)
+                {
+                    _BlobInstance = CloudBlobContainer.GetBlobReference(BLOB_NAME);
+                }
+                return _BlobInstance;
             }
         }
 
@@ -60,7 +83,11 @@ namespace footprints.web
         {
             get
             {
-                return CloudStorageAccount.CreateCloudQueueClient();
+                if (_QueueClientInstance == null)
+                {
+                    _QueueClientInstance = CloudStorageAccount.CreateCloudQueueClient();
+                }
+                return _QueueClientInstance;
             }
         }
 
@@ -68,9 +95,12 @@ namespace footprints.web
         {
             get
             {
-                CloudQueue queue = CloudQueueClient.GetQueueReference(QUEUE_NAME);
-                queue.CreateIfNotExist();
-                return queue;
+                if (_QueueInstance == null)
+                {
+                    _QueueInstance = CloudQueueClient.GetQueueReference(QUEUE_NAME);
+                    _QueueInstance.CreateIfNotExist();
+                }
+                return _QueueInstance;
             }
         }
     }

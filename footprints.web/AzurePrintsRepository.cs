@@ -21,5 +21,10 @@ namespace footprints.web
             var blob = new PrintsBlob(AzurePrints.CloudBlob);
             return blob.AsPrintsModel.List.AsEnumerable();
         }
+
+        public void DeleteAll()
+        {
+            AzurePrints.CloudBlob.DeleteIfExists();
+        }
     }
 }

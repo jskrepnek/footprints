@@ -6,21 +6,21 @@ body {
     padding-top: 200px;
     background-image: url(images/footprints.png);
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position:top;
+    background-attachment:local;
+    background-position: top;
     width: 100%;
-    background-color:#f2f2f4;
-    border-bottom-color:#808080;
-    border-bottom-style:ridge;
-    border-bottom-width:thin;
+    background-color: #f2f2f4;
+    border-bottom-color: #808080;
+    border-bottom-style: ridge;
+    border-bottom-width: thin;
     margin-bottom: 30px;
 }
 
 .footprints-watermark {
     background-image: url(images/footprints.png);
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
+    background-attachment:local;
+    background-position:top;
     width: 1200px;
     height: 30px;
 }
@@ -31,53 +31,83 @@ body {
     line-height: 160px;
 }
 
+.silenta {
+    color:#000;
+}
+
 .tile-action {
     font-family: Aharoni;
     font-size: 85px;
-    line-height: 90px;    
+    line-height: 90px;
 }
 
 .footprint-form {
-    margin-left:100px;
-    font-size:40px;
-    min-width:max-content;
+    margin-left: 100px;
+    font-size: 40px;
+    min-width: max-content;
 }
 
 label {
-   font-family:Aharoni;
-   font-size:25px;
-   line-height: 27px;
+    font-family: Aharoni;
+    font-size: 25px;
+    line-height: 27px;
 }
 
 input[type="text"] {
-    height:35px;
-    font-size:25px;
+    height: 35px;
+    font-size: 25px;
 }
 
 input {
-    width:350px;
+    width: 350px;
 }
 
 #outer {
-    height:258px;
-    overflow:hidden;
-    position:relative;
-    display:table;
+    height: 258px;
+    overflow: hidden;
+    position: relative;
+    display: table;
 }
 
 #middle {
-    display:table-cell;
-    vertical-align:middle;
-    width:100%;   
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
 }
 
 #inner {
-    
 }
 
 .thanks-text {
-    margin-top:30px;
-    font-family:Aharoni;
-    font-size:40px;
-    text-align:center;
+    margin-top: 30px;
+    font-family: Aharoni;
+    font-size: 40px;
+    line-height:40px;
+    text-align: center;
+}
+
+.first-name-text {
+    font-family: Aharoni;
+    font-size: 15px;
+    line-height: 15px;
+}
+
+.last-name-text {
+    font-family: Aharoni;
+    font-size: 45px;
+    line-height: 45px;
+}
+
+.date-text {
+    font-family: Aharoni;
+    font-size: 10px;
+    line-height: 10px;
+}
+
+.phrase-text {
+    margin-top:20px;
+    font-family: Aharoni;
+    font-size: 45px;
+    font-style: italic;
+    line-height: 45px;
 }

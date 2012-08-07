@@ -10,7 +10,7 @@
 <body>
 
     <div class="container title">
-        <p class="footprints-title">footprints</p>
+        <p class="footprints-title">@Html.ActionLink("footprints", "Index", "Home", null, new { @class = "silenta", onmouseover = "this.style.textDecoration='none';this.style.color='#000'" })</p>
     </div>
 
     @RenderBody()

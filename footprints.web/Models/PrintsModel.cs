@@ -8,24 +8,24 @@ namespace footprints.web.Models
     [Serializable()]
     public class PrintsModel
     {
+        List<PrintModel> _list;
+
         public PrintsModel()
         {
-            list = new List<PrintModel>();
+            _list = new List<PrintModel>();
         }
 
         public void Add(PrintModel print)
         {
-            list.Add (print);
+            List.Add (print);
         }
 
         public List<PrintModel> List
         {
             get
             {
-                return list;
+                return _list;
             }
-        }
-
-        public List<PrintModel> list { get; set; }
+        }        
     }
 }

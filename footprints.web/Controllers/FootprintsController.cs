@@ -18,14 +18,9 @@ namespace footprints.web.Controllers
             PrintsRepository = printsListFactory.Create();
         }
 
-        public ActionResult ViewPrints()
+        public ViewResult ViewPrints()
         {
-            return View(PrintsRepository.GetPrints());
-        }
-
-        public ActionResult AddPrint()
-        {
-            return View();
+            return View("ViewPrints", PrintsRepository.GetPrints().OrderBy(print => print.LastName));
         }
 
         public ActionResult Added()
@@ -33,18 +28,30 @@ namespace footprints.web.Controllers
             return View();
         }
 
+        public ViewResult AddPrint()
+        {
+            return View("AddPrint");
+        }
+     
         [HttpPost]
         public ActionResult AddPrint(PrintModel model)
-        {
+        {        
             if (ModelState.IsValid)
             {
                 model.Date = DateTime.Now;
+
                 CommandAgent.SendCommand(model);
 
                 return RedirectToAction("Added");
             }
 
-            return View();
+            return View("AddPrint");
+        }
+        
+        public ActionResult DeleteAllPrints()
+        {
+            PrintsRepository.DeleteAll();
+            return RedirectToAction("ViewPrints");
         }
     }
 }

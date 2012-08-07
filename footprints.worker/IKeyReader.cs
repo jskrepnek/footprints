@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace footprints.test
+namespace footprints.worker
 {
-    public class Class1
+    public interface IKeyReader
     {
+        bool KeyAvailable { get; }
     }
 }

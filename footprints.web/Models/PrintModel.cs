@@ -21,6 +21,7 @@ namespace footprints.web.Models
         [Display(Name = "Phrase")]
         public string Phrase { get; set; }
 
+        [DisplayFormat(DataFormatString="{0:f}")]
         public DateTime Date { get; set; }
     }
 }

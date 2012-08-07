@@ -9,5 +9,6 @@ namespace footprints.web
     public interface IPrintsRepository
     {
         IEnumerable<PrintModel> GetPrints();
+        void DeleteAll();
     }
 }
