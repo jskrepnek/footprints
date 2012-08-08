@@ -9,15 +9,15 @@ namespace footprints.web.Models
     [Serializable()]
     public class PrintModel
     {
-        [Required]
+        [Required(ErrorMessage = "*")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "*")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="*")]
         [Display(Name = "Phrase")]
         public string Phrase { get; set; }
 

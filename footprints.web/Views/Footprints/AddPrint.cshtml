@@ -8,33 +8,32 @@
 <div class="container">
     <div class="row">
         @using (Html.BeginForm())
-        {
-            @Html.ValidationSummary(true)
+        { 
     
             <div class="span6">
                 <div class="footprint-form">
-                    <div class="editor-label">
+                    <div class="control-group clearfix">
                         @Html.LabelFor(model => model.FirstName)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => model.FirstName)
-                        @Html.ValidationMessageFor(model => model.FirstName)
+                        <div class="controls">
+                            @Html.EditorFor(model => model.FirstName)
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                        </div>
                     </div>
 
-                    <div class="editor-label">
+                    <div class="control-group clearfix">
                         @Html.LabelFor(model => model.LastName)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => model.LastName)
-                        @Html.ValidationMessageFor(model => model.LastName)
+                        <div class="controls">
+                            @Html.EditorFor(model => model.LastName)
+                            @Html.ValidationMessageFor(model => model.LastName)
+                        </div>
                     </div>
 
-                    <div class="editor-label">
+                    <div class="control-group clearfix">
                         @Html.LabelFor(model => model.Phrase)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => model.Phrase)
-                        @Html.ValidationMessageFor(model => model.Phrase)
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Phrase)
+                            @Html.ValidationMessageFor(model => model.Phrase)
+                        </div>
                     </div>
                 </div>
             </div>            
@@ -42,7 +41,7 @@
                 <div id="outer">
                     <div id="middle">
                         <div id="inner">
-                            <input type="submit" style="white-space:normal" value="add your print" class="btn btn-primary tile-action" />
+                            <input type="submit" style="white-space: normal" value="add your print" class="btn btn-primary tile-action" />
                         </div>
                     </div>
                 </div>
